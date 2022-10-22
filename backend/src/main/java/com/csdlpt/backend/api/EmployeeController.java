@@ -3,6 +3,7 @@ package com.csdlpt.backend.api;
 import com.csdlpt.backend.model.employee.EmployeeList;
 import com.csdlpt.backend.model.employee.EmployeeReq;
 import com.csdlpt.backend.model.employee.EmployeeRes;
+import com.csdlpt.backend.model.employee.LoginReq;
 import com.csdlpt.backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,15 @@ public class EmployeeController {
         service.deleteEmployee(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login",
+            consumes = {"application/json"},
+            produces = {"application/json"},
+            method = RequestMethod.POST)
+    public ResponseEntity<EmployeeRes> addEmployee(@RequestBody LoginReq loginReq) throws Exception {
+        EmployeeRes response = service.login(loginReq.getEmail(), loginReq.getPassword());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

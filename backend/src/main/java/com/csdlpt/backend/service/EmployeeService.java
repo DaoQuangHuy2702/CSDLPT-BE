@@ -68,6 +68,16 @@ public class EmployeeService {
         return mapper.mapEmployeeResFromEmployeeEntity(saved);
     }
 
+    public EmployeeRes login(String email, String password) throws Exception {
+        EmployeeEntity empEntity = repo.getEmployeeEntityByEmailAndPassword(email, password);
+
+        if(empEntity.getDeletedAt() != null) {
+            throw new Exception();
+        }
+
+        return mapper.mapEmployeeResFromEmployeeEntity(empEntity);
+    }
+
     public void deleteEmployee(int id) {
         EmployeeEntity empEntity = repo.getById(id);
         Date current = new Date();
