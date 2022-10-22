@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer> {
     List<EmployeeEntity> findAllByBranchId(int branchId);
+    EmployeeEntity getEmployeeEntityByEmailAndPassword(String email, String password);
 }
